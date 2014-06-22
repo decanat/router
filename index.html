@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Router by decanat</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Router</h1>
+        <p>Client-side router.</p>
+
+        <p class="view"><a href="https://github.com/decanat/router">View the Project on GitHub <small>decanat/router</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/decanat/router/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/decanat/router/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/decanat/router">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="decanat-router" class="anchor" href="#decanat-router"><span class="octicon octicon-link"></span></a>decanat-router</h1>
+
+<p>Client-side router.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Using <a href="https://github.com/component/component">component</a>:</p>
+
+<pre><code>$ component install decanat/router
+</code></pre>
+
+<p>Using <a href="http://npmjs.org/">npm</a> for <a href="http://browserify.org/">browserify</a>:</p>
+
+<pre><code>$ npm install decanat-router
+</code></pre>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">Router</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'router'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">Router</span><span class="p">();</span>
+
+<span class="nx">router</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">'/blog/:thread/'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">xxx</span><span class="p">,</span> <span class="nx">next</span><span class="p">){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xxx</span><span class="p">);</span> <span class="c1">// null</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">thread</span><span class="p">);</span> <span class="c1">// thread id parsed from url</span>
+        <span class="nx">next</span><span class="p">()</span>
+    <span class="p">});</span>
+
+<span class="nx">router</span><span class="p">.</span><span class="nx">listen</span><span class="p">();</span>
+</pre></div>
+
+<h2>
+<a name="test" class="anchor" href="#test"><span class="octicon octicon-link"></span></a>Test</h2>
+
+<p>Run unit tests:</p>
+
+<pre><code>$ make test
+</code></pre>
+
+<h2>
+<a name="forebears" class="anchor" href="#forebears"><span class="octicon octicon-link"></span></a>Forebears</h2>
+
+<p>This project is inspired my and based on <a href="http://visionmedia.github.io/page.js/">Page.js</a>.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>The MIT License.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/decanat">decanat</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-51829400-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
