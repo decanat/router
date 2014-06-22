@@ -458,8 +458,7 @@ require.register("router/lib/router.js", Function("exports, module",
 "// Load dependencies\n\
 var Emitter = require(\"component~emitter@1.1.3\");\n\
 \n\
-var extend  = require(\"yiwn~extend@0.0.1\"),\n\
-    merge   = require(\"yiwn~merge@0.0.1\");\n\
+var extend  = require(\"yiwn~extend@0.0.1\");\n\
 \n\
 // local\n\
 var Context = require(\"router/lib/context.js\"),\n\
@@ -467,16 +466,6 @@ var Context = require(\"router/lib/context.js\"),\n\
 \n\
 // Expose\n\
 module.exports = Router;\n\
-\n\
-\n\
-// Initial properties\n\
-var defaults = {\n\
-        // router\n\
-        running : false,\n\
-        // mount\n\
-        mntPath : '',\n\
-        parent  : null\n\
-    };\n\
 \n\
 \n\
 /**\n\
@@ -492,20 +481,27 @@ function Router(){\n\
     if (!(this instanceof Router))\n\
         return new Router();\n\
 \n\
-    this.nodes  = [];\n\
-    this.routes = [];\n\
-\n\
-    merge(this, defaults);\n\
-\n\
-    delegate(this);\n\
-\n\
     return this;\n\
 }\n\
-\n\
 \n\
 Router.extend = extend.bind(null, Router);\n\
 \n\
 Emitter(Router.prototype);\n\
+\n\
+Router.prototype.initialize = function() {\n\
+    this.running = false;\n\
+\n\
+    this.routes = [];\n\
+\n\
+    this.mntPath = '';\n\
+    this.parent  = null;\n\
+    this.nodes  = [];\n\
+\n\
+    delegate(this);\n\
+\n\
+    return this;\n\
+};\n\
+\n\
 \n\
 \n\
 /**\n\
