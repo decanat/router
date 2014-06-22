@@ -25,5 +25,6 @@ serve:
 
 clean:
 	rm -fr build components node_modules
+	rm test/main.js
 
 .PHONY: build test lint build-dev serve clean
