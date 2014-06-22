@@ -2,6 +2,8 @@
 
 Client-side router.
 
+![Router](http://decanat.github.io/router/images/vane.png)
+
 ## Installation
 
 Using [component](https://github.com/component/component):
