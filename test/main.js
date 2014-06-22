@@ -399,53 +399,70 @@ require.modules["yiwn~extend"] = require.modules["yiwn~extend@0.0.1"];
 require.modules["extend"] = require.modules["yiwn~extend@0.0.1"];
 
 
-require.register("yiwn~merge@0.0.1", Function("exports, module",
-"module.exports = require(\"yiwn~merge@0.0.1/lib/merge.js\");\n\
-\n\
-//# sourceURL=components/yiwn/merge/0.0.1/index.js"
-));
-
-require.register("yiwn~merge@0.0.1/lib/merge.js", Function("exports, module",
+require.register("component~path-to-regexp@v0.1.2", Function("exports, module",
 "/**\n\
- * Load dependencies\n\
+ * Expose `pathtoRegexp`.\n\
  */\n\
 \n\
-var type = require(\"component~type@1.0.0\");\n\
+module.exports = pathtoRegexp;\n\
 \n\
 /**\n\
- * Expose `merge`\n\
- */\n\
-\n\
-module.exports = merge;\n\
-\n\
-\n\
-/**\n\
- * Merge one object with another,\n\
- * optionally keeping attributes on first.\n\
+ * Normalize the given path string,\n\
+ * returning a regular expression.\n\
  *\n\
- * @param  {Object} target\n\
- * @param  {Object} source\n\
- * @param  {Boolean} force [optional]\n\
- * @return {Object}\n\
+ * An empty array should be passed,\n\
+ * which will contain the placeholder\n\
+ * key names. For example \"/user/:id\" will\n\
+ * then contain [\"id\"].\n\
+ *\n\
+ * @param  {String|RegExp|Array} path\n\
+ * @param  {Array} keys\n\
+ * @param  {Object} options\n\
+ * @return {RegExp}\n\
+ * @api private\n\
  */\n\
 \n\
-function merge(target, source, force) {\n\
-    if (!source || type(source) != 'object')\n\
-        return target;\n\
+function pathtoRegexp(path, keys, options) {\n\
+  options = options || {};\n\
+  var sensitive = options.sensitive;\n\
+  var strict = options.strict;\n\
+  var end = options.end !== false;\n\
+  keys = keys || [];\n\
 \n\
-    for (var attr in source)\n\
-        if (type(target[attr]) == 'undefined' || force)\n\
-            target[attr] = source[attr];\n\
+  if (path instanceof RegExp) return path;\n\
+  if (path instanceof Array) path = '(' + path.join('|') + ')';\n\
 \n\
-    return target;\n\
-}\n\
+  path = path\n\
+    .concat(strict ? '' : '/?')\n\
+    .replace(/\\/\\(/g, '/(?:')\n\
+    .replace(/([\\/\\.])/g, '\\\\$1')\n\
+    .replace(/(\\\\\\/)?(\\\\\\.)?:(\\w+)(\\(.*?\\))?(\\*)?(\\?)?/g, function (match, slash, format, key, capture, star, optional) {\n\
+      slash = slash || '';\n\
+      format = format || '';\n\
+      capture = capture || '([^/' + format + ']+?)';\n\
+      optional = optional || '';\n\
 \n\
-//# sourceURL=components/yiwn/merge/0.0.1/lib/merge.js"
+      keys.push({ name: key, optional: !!optional });\n\
+\n\
+      return ''\n\
+        + (optional ? '' : slash)\n\
+        + '(?:'\n\
+        + format + (optional ? slash : '') + capture\n\
+        + (star ? '((?:[\\\\/' + format + '].+?)?)' : '')\n\
+        + ')'\n\
+        + optional;\n\
+    })\n\
+    .replace(/\\*/g, '(.*)');\n\
+\n\
+  return new RegExp('^' + path + (end ? '$' : '(?=\\/|$)'), sensitive ? '' : 'i');\n\
+};\n\
+\n\
+//# sourceURL=components/component/path-to-regexp/v0.1.2/index.js"
 ));
 
-require.modules["yiwn-merge"] = require.modules["yiwn~merge@0.0.1"];
-require.modules["yiwn~merge"] = require.modules["yiwn~merge@0.0.1"];
-require.modules["merge"] = require.modules["yiwn~merge@0.0.1"];
+require.modules["component-path-to-regexp"] = require.modules["component~path-to-regexp@v0.1.2"];
+require.modules["component~path-to-regexp"] = require.modules["component~path-to-regexp@v0.1.2"];
+require.modules["path-to-regexp"] = require.modules["component~path-to-regexp@v0.1.2"];
 
 
 require.register("router", Function("exports, module",
@@ -780,8 +797,7 @@ Router.prototype.each = function(fn) {\n\
 ));
 
 require.register("router/lib/route.js", Function("exports, module",
-"// Shim\n\
-var slice = [].slice;\n\
+"var pathtoRegexp = require(\"component~path-to-regexp@v0.1.2\");\n\
 \n\
 // Expose\n\
 module.exports = Route;\n\
@@ -819,7 +835,7 @@ function Route(path) {\n\
 \n\
 Route.prototype.use = function(fn) {\n\
     var wares = this.wares,\n\
-        fns   = slice.call(arguments);\n\
+        fns   = [].slice.call(arguments);\n\
 \n\
     while (fn = fns.shift())\n\
         wares.push(fn);\n\
@@ -912,49 +928,6 @@ Route.prototype.populate = function(path, params){\n\
 \n\
     return true;\n\
 };\n\
-\n\
-\n\
-/**\n\
- * Normalize the given path string,\n\
- * returning a regular expression.\n\
- *\n\
- * An empty array should be passed,\n\
- * which will contain the placeholder\n\
- * key names. For example \"/user/:id\" will\n\
- * then contain [\"id\"].\n\
- *\n\
- * @param  {String|RegExp|Array} path\n\
- * @param  {Array} keys\n\
- * @return {RegExp}\n\
- * @api private\n\
- */\n\
-\n\
-function pathtoRegexp(path, keys) {\n\
-    if (path instanceof RegExp) return path;\n\
-\n\
-    if (path instanceof Array)\n\
-        path = '(' + path.join('|') + ')';\n\
-\n\
-    path = path\n\
-        .concat('/?')\n\
-        .replace(/\\/\\(/g, '(?:/')\n\
-        .replace(/(\\/)?(\\.)?:(\\w+)(?:(\\(.*?\\)))?(\\?)?/g, replace)\n\
-        .replace(/([\\/.])/g, '\\\\$1')\n\
-        .replace(/\\*/g, '(.*)');\n\
-\n\
-    function replace(_, slash, format, key, capture, optional){\n\
-        keys.push({ name: key, optional: !! optional });\n\
-        slash = slash || '';\n\
-        return ''\n\
-            + (optional ? '' : slash)\n\
-            + '(?:'\n\
-            + (optional ? slash : '')\n\
-            + (format || '') + (capture || (format && '([^/.]+?)' || '([^/]+?)')) + ')'\n\
-            + (optional || '');\n\
-    }\n\
-\n\
-    return new RegExp('^' + path + '$', 'i');\n\
-}\n\
 \n\
 //# sourceURL=lib/route.js"
 ));
