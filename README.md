@@ -40,7 +40,7 @@ Run unit tests:
 
 ## Forebears
 
-This project is inspired my and based on [Page.js](http://visionmedia.github.io/page.js/).
+This project is inspired by and based on [Page.js](http://visionmedia.github.io/page.js/).
 
 ## License
 
