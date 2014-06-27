@@ -132,35 +132,6 @@ describe('Testing:', function(){
             expect(r4.base)
                 .to.equal('/mnt4/mnt');
         });
-
-
-        it('should iterate over node routers with `.each`', function(){
-            var r1 = Router(),
-                r2 = Router();
-
-            router.mount('/mnt1', r1);
-            router.mount('/mnt2', r2);
-
-
-            expect(router.nodes)
-                .to.have.length(2);
-
-            var spy = sinon.spy();
-
-            var r1s = spy.withArgs(r1, '/mnt1'),
-                r2s = spy.withArgs(r2, '/mnt2');
-
-            router.each(spy);
-
-            expect(r1s.calledOnce)
-                .to.be.ok;
-
-            expect(r2s.calledOnce)
-                .to.be.ok;
-
-            expect(spy.alwaysCalledOn(router))
-                .to.be.ok;
-        });
     });
 
 
