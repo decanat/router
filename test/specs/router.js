@@ -44,7 +44,7 @@ describe('Testing:', function(){
                 .to.be.an('array')
                 .to.have.length(0);
 
-            expect(router.root())
+            expect(router.root)
                 .to.equal(router);
 
             expect(router.running)
@@ -80,7 +80,7 @@ describe('Testing:', function(){
                     .to.equal(r1)
                     .to.have.property('parent', router);
 
-                expect(this.root())
+                expect(this.root)
                     .to.equal(router);
 
                 expect(this.mntPath)
@@ -100,12 +100,12 @@ describe('Testing:', function(){
             router.mount('/mnt1', r1);
             r1.mount('/mnt2', r2);
 
-            expect(r1.base())
+            expect(r1.base)
                 .to.equal('/mnt1');
-            expect(r2.base())
+            expect(r2.base)
                 .to.equal('/mnt1/mnt2');
 
-            expect(r2.root())
+            expect(r2.root)
                 .to.equal(router);
         });
 
@@ -120,16 +120,16 @@ describe('Testing:', function(){
             router.mount('mnt3/', r3);
             router.mount('mnt4/mnt', r4);
 
-            expect(r1.base())
+            expect(r1.base)
                 .to.equal('/mnt1');
 
-            expect(r2.base())
+            expect(r2.base)
                 .to.equal('/mnt2');
 
-            expect(r3.base())
+            expect(r3.base)
                 .to.equal('/mnt3');
 
-            expect(r4.base())
+            expect(r4.base)
                 .to.equal('/mnt4/mnt');
         });
 
