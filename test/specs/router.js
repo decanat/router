@@ -202,16 +202,27 @@ describe('Testing:', function(){
         });
 
         it('should route relative to mountpath', function(){
-            var r = Router();
+            var r0 = Router(),
+                r1 = Router(),
+                r2 = Router();
 
-            var spy = sinon.spy(router, 'show');
+            var spy = sinon.spy(router, 'show'),
+                sp1 = sinon.spy(r1, 'dispatch'),
+                sp2 = sinon.spy(r2, 'dispatch');
 
-            router.mount('/mnt', r);
+            router.mount('/mnt', r0);
+            r0.mount('/test', r1);
+            r0.mount('/mnt2', r2);
 
-            r.show('test');
+            r0.show('test');
 
             expect(spy.withArgs('/mnt/test').called)
                 .to.be.ok;
+
+            expect(sp1.called)
+                .to.be.true;
+            expect(sp2.called)
+                .to.be.false;
         });
 
         it('should propogate from top to bottom', function(){
