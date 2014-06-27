@@ -22,8 +22,7 @@ var Router = require('router');
 var router = Router();
 
 router.route('/blog/:thread/')
-    .use(function(ctx, xxx, next){
-        console.log(xxx); // null
+    .use(function(ctx, next){
         console.log(ctx.params.thread); // thread id parsed from url
         next()
     });
@@ -37,10 +36,10 @@ Run unit tests:
 
     $ make test
 
-
 ## Forebears
 
-This project is inspired by and based on [Page.js](http://visionmedia.github.io/page.js/).
+  - <https://github.com/visionmedia/page.js>
+  - <https://github.com/ianstormtaylor/router>
 
 ## License
 
