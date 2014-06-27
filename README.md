@@ -1,8 +1,6 @@
-# decanat-router
+# ![Router](http://decanat.github.io/router/images/vane-min.png) decanat-router
 
 Client-side router.
-
-![Router](http://decanat.github.io/router/images/vane.png)
 
 ## Installation
 
