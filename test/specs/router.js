@@ -382,10 +382,10 @@ describe('Testing:', function(){
             path = '/test/something?and=then&something=else';
         });
 
-        it('should parse querystring', function(done){
+        it('should parse querystring as "search"', function(done){
             route.use(function(ctx){
-                expect(ctx.querystring)
-                    .to.equal('and=then&something=else')
+                expect(ctx.search)
+                    .to.equal('?and=then&something=else')
 
                 expect(ctx.query)
                     .to.eql({ and: 'then', something: 'else' });
@@ -420,7 +420,7 @@ describe('Testing:', function(){
         it('should expose hashtag', function(done){
             route.use(function(ctx){
                 expect(ctx.hash)
-                    .to.equal('hello');
+                    .to.equal('#hello');
 
                 done();
             });

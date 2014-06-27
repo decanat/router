@@ -11,7 +11,9 @@
     "component/emitter": "^1.1.2",
     "decanat/querystring": "^1.3.2",
     "yiwn/extend": "*",
-    "component/path-to-regexp": "~0.1.2"
+    "component/path-to-regexp": "~0.1.2",
+    "decanat/url": "~0.1.2",
+    "yiwn/merge": "~0.0.1"
   },
   "development": {},
   "license": "MIT",
