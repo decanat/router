@@ -349,24 +349,27 @@ describe('Testing:', function(){
                     params: []
                 };
 
-            route3.use(function(ctx, req, next){
+            route3.use(function(ctx, req, num, next){
                 ctx.something = 'custom';
 
                 next();
             });
 
-            route3.use(function(ctx, req, next){
+            route3.use(function(ctx, req, num, next){
                 expect(ctx)
                     .to.have.property('something', 'custom');
 
-                next()
+                expect(num)
+                    .to.equal(6);
+
+                next();
             });
 
             expect(route3.wares)
                 .to.be.an('array')
                 .to.have.length(2);
 
-            route3.dispatch(context, null, done)
+            route3.dispatch([context, null, 6], done)
         });
 
         it('should act correctly when mounted', function(done){
