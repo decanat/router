@@ -1,7 +1,7 @@
 {
   "name": "decanat-router",
   "description": "Client-side router.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Mushex Antaranian",
   "engines": {
     "node": ">=0.10.0"

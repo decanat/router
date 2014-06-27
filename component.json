@@ -2,7 +2,7 @@
   "name": "router",
   "repo": "decanat/router",
   "description": "Client-side router.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [
     "router",
     "decanat"
