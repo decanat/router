@@ -1,4 +1,4 @@
-# ![Router](http://decanat.github.io/router/images/vane-min.png) decanat-router
+# ![Router](http://decanat.github.io/router/images/vane-s.png) decanat-router
 
 Client-side router.
 
