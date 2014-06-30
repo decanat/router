@@ -4,24 +4,13 @@ var Router = require('router');
 
 
 describe('Testing:', function(){
-    describe('Constructor', function(){
-        it('should be proper type', function(){
-            expect(Router)
-                .to.be.a('function');
-        });
+    var router;
 
-        it('should work with or without `new`', function(){
-            expect(Router())
-                .to.be.instanceof(Router);
-
-            expect(new Router())
-                .to.be.instanceof(Router);
-        });
+    beforeEach(function(){
+        router = Router();
     });
 
     describe('Instance', function(){
-        var router = Router();
-
         it('should initialize in neutral state', function(){
             expect(router)
                 .to.have.property('mntPath', '');
@@ -55,12 +44,6 @@ describe('Testing:', function(){
     });
 
     describe('Mounting', function(){
-        var router;
-
-        beforeEach(function(){
-            router = Router();
-        });
-
         it('should mount properly with `mount` event', function(done){
             var r1 = Router();
 
@@ -126,12 +109,6 @@ describe('Testing:', function(){
 
 
     describe('Routing', function(){
-        var router;
-
-        beforeEach(function(){
-            router = Router();
-        });
-
         it('should perform initial dispatch by default', function(done){
             router.route('/')
                 .use(function(){
@@ -225,17 +202,13 @@ describe('Testing:', function(){
     });
 
     describe('Route', function(){
-        var router,
-            route1, route2, route3;
+        var route1, route2, route3;
 
         beforeEach(function(){
-            router = Router();
-
             route1 = router.route('/test/');
             route2 = router.route('/test/*');
             route3 = router.route('/test/:section');
         });
-
 
         it('should match express-style routes correctly', function(){
             var path1 = '/test/',
@@ -350,9 +323,9 @@ describe('Testing:', function(){
     });
 
     describe('Context', function(){
-        var router, route, path;
+        var route, path;
+
         beforeEach(function(){
-            router = Router();
             route = router.route('*');
             path = '/test/something?and=then&something=else';
         });
