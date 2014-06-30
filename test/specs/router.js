@@ -17,16 +17,6 @@ describe('Testing:', function(){
             expect(new Router())
                 .to.be.instanceof(Router);
         });
-
-        it('should be "extendable"', function(){
-            var Vein = Router.extend();
-
-            var vein = new Vein();
-
-            expect(vein)
-                .to.be.instanceof(Vein)
-                .to.be.instanceof(Router);
-        });
     });
 
     describe('Instance', function(){
